@@ -26,12 +26,10 @@ function verifyPin() {
   }
 }
 
-// Show Messages
+// Show Messages (Loops After the Last One)
 function showNextMessage() {
-  if (currentMessage < messages.length) {
-    document.getElementById("message").textContent = messages[currentMessage];
-    currentMessage++;
-  }
+  document.getElementById("message").textContent = messages[currentMessage];
+  currentMessage = (currentMessage + 1) % messages.length;
 }
 
 // Auto-update Copyright Year
@@ -42,9 +40,9 @@ document.addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
     const pinInput = document.getElementById("pin");
     if (pinInput && pinInput === document.activeElement) {
-      verifyPin(); // If PIN input is focused, verify PIN
+      verifyPin();
     } else {
-      showNextMessage(); // Otherwise, reveal next message
+      showNextMessage();
     }
   }
 });
