@@ -1,50 +1,62 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const pinScreen = document.getElementById("pin-screen");
-    const mainContent = document.getElementById("main-content");
-    const pinInput = document.getElementById("pin-input");
-    const pinSubmit = document.getElementById("pin-submit");
-    const pinError = document.getElementById("pin-error");
-    const correctPin = "2005";
+const pin = "2005"; 
+const messages = [
+    "Happy Valentine’s Day, my love! 💖",
+    "Every heartbeat of mine whispers your name. ❤️",
+    "No gift could ever match the love I have for you. 🎁💫",
+    "If love had a scent, it would be the way your presence feels. 🌹",
+    "In your arms, I’ve found my forever. 💑",
+    "You're not just my love; you are my heart’s only rhythm. 🎶",
+    "No matter what tomorrow holds, my love for you will never fade. 💕",
+    "This Valentine’s, I just want you to know—you are my greatest blessing. 💘"
+];
 
-    // PIN validation
-    pinSubmit.addEventListener("click", function () {
-        if (pinInput.value === correctPin) {
-            pinScreen.classList.add("hidden");
-            mainContent.classList.remove("hidden");
-            document.getElementById("bg-music").play();
-            generateHearts();
-        } else {
-            pinError.textContent = "Incorrect PIN. Try again!";
-        }
-    });
+let currentMessage = 0;
 
-    // Dynamic copyright year
-    document.getElementById("year").textContent = new Date().getFullYear();
+// Verify PIN
+function verifyPin() {
+  const pinInput = document.getElementById("pin").value;
+  if (pinInput === pin) {
+    document.querySelector(".pin-container").style.display = "none";
+    document.getElementById("card").style.display = "block";
+    document.getElementById("bg-music").play();
+    showNextMessage();
+    startHearts();
+  } else {
+    document.getElementById("wrong-pin").style.display = "block";
+  }
+}
 
-    // Love messages
-    const messages = [
-        "Happy Valentine's, Sharlyn! 💕 You are my greatest love! 😘",
-        "Every moment with you is magic! ✨",
-        "You are my heart's greatest treasure! ❤️",
-        "Loving you is the best thing I've ever done. 💖",
-        "I choose you, always and forever! 💑"
-    ];
-    let msgIndex = 0;
-    document.getElementById("nextMessage").addEventListener("click", function () {
-        msgIndex = (msgIndex + 1) % messages.length;
-        document.getElementById("message").textContent = messages[msgIndex];
-    });
+// Show Messages
+function showNextMessage() {
+  if (currentMessage < messages.length) {
+    document.getElementById("message").textContent = messages[currentMessage];
+    currentMessage++;
+  }
+}
 
-    // Floating hearts
-    function generateHearts() {
-        const heartContainer = document.querySelector(".hearts");
-        setInterval(() => {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-            heartContainer.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }, 500);
+// Auto-update Copyright Year
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Keyboard "Enter" Support
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    const pinInput = document.getElementById("pin");
+    if (pinInput && pinInput === document.activeElement) {
+      verifyPin(); // If PIN input is focused, verify PIN
+    } else {
+      showNextMessage(); // Otherwise, reveal next message
     }
+  }
 });
+
+// Floating Hearts Animation
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+    document.querySelector(".hearts").appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 500);
+}
