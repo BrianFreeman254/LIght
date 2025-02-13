@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forever Yours, Sharlyn ❤️</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Love for You ❤️</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- PIN Screen -->
-    <div id="pin-screen" class="pin-container">
-        <h2>Enter Your Special PIN</h2>
-        <input type="password" id="pin-input" maxlength="4">
-        <button id="pin-submit">Unlock</button>
-        <p id="pin-error" class="error-message"></p>
+
+  <!-- PIN Entry -->
+  <div class="pin-container">
+    <h1>Enter PIN to Unlock Your Valentine’s Card</h1>
+    <input type="password" id="pin" placeholder="Enter PIN" />
+    <button id="pin-btn" onclick="verifyPin()">Submit</button>
+    <p id="wrong-pin">Incorrect PIN. Try again, love.</p>
+  </div>
+
+  <!-- Main Love Card -->
+  <div class="container" id="card">
+    <h1>To My Love, Sharlyn ❤️</h1>
+    <div class="message-box">
+      <p id="message"></p>
     </div>
+    <button id="next-btn" onclick="showNextMessage()">Tap to Reveal More</button>
+    
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+      <source src="music.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
 
-    <!-- Main Content -->
-    <div id="main-content" class="hidden">
-        <div class="hearts"></div>
-        <div class="container">
-            <div class="card" id="card">
-                <div class="front">❤️ Click to Reveal ❤️</div>
-                <div class="back">
-                    <p id="message">Happy Valentine's, Sharlyn! 💕 You are my greatest love! 😘</p>
-                    <button id="nextMessage">Next Message</button>
-                </div>
-            </div>
-        </div>
+    <!-- Floating Hearts -->
+    <div class="hearts"></div>
 
-        <audio id="bg-music" loop>
-            <source src="music.mp3" type="audio/mp3">
-        </audio>
-
-        <footer>
-            <p>&copy; <span id="year"></span> Brian Wachiye. All Rights Reserved.</p>
-        </footer>
+    <!-- Copyright -->
+    <div class="copyright">
+      © <span id="year"></span> Brian & Sharlyn. All Rights Reserved.
     </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
