@@ -1,6 +1,6 @@
 const pin = "2005"; 
 const messages = [
-    "Happy Valentine’s Day, my love! 💖",
+    "Happy Valentine’s Day, my love.. 💖",
     "Every heartbeat of mine whispers your name. ❤️",
     "No gift could ever match the love I have for you. 🎁💫",
     "If love had a scent, it would be the way your presence feels. 🌹",
