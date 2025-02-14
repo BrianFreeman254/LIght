@@ -18,7 +18,14 @@ function verifyPin() {
   if (pinInput === pin) {
     document.querySelector(".pin-container").style.display = "none";
     document.getElementById("card").style.display = "block";
-    document.getElementById("bg-music").play();
+
+    // Ensure music plays and loops correctly
+    const music = document.getElementById("bg-music");
+    music.loop = true; // Ensures it repeats automatically
+    music.play().catch(() => {
+      console.log("Autoplay prevented. User must interact with the page.");
+    });
+
     showNextMessage();
     startHearts();
   } else {
